@@ -45,7 +45,9 @@ module.exports = {
       actions: path.resolve(paths.src, 'actions'),
       styles: path.resolve(paths.src, 'styles'),
       reducers: path.resolve(paths.src, 'reducers'),
-      routes: path.resolve(paths.src, 'routes')
+      routes: path.resolve(paths.src, 'routes'),
+      'mapbox-gl/js/geo/transform': path.join(__dirname, "/node_modules/mapbox-gl/js/geo/transform"),
+      'mapbox-gl': path.join(__dirname, "/node_modules/mapbox-gl/dist/mapbox-gl.js")
     }
   },
   plugins: [
