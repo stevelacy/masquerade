@@ -3,6 +3,7 @@ import { Component, PropTypes, connect } from 'core'
 import classes from 'classnames'
 import TransitionGroup from 'react-addons-css-transition-group'
 import actions from 'core/actions'
+import Navbar from 'components/Navbar'
 import './index.sass'
 
 @connect({
@@ -17,6 +18,7 @@ export default class IndexView extends Component {
   render() {
     return (
       <div className='home-view'>
+        <Navbar />
         home
       </div>
     )
