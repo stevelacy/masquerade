@@ -7,8 +7,8 @@ import NotFoundView from 'views/NotFound'
 
 const routes = (
   <Route path='/'>
-    {/* <IndexRoute component={IndexView} /> */}
-    {/* <Route path='*' component={NotFoundView} /> */}
+    <IndexRoute component={IndexView} />
+    <Route path='*' component={NotFoundView} />
   </Route>
 )
 
