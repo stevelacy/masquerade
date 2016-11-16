@@ -4,6 +4,7 @@ import classes from 'classnames'
 import TransitionGroup from 'react-addons-css-transition-group'
 import actions from 'core/actions'
 import Navbar from 'components/Navbar'
+import MapView from 'views/Map'
 import './index.sass'
 
 @connect({
@@ -20,6 +21,7 @@ export default class IndexView extends Component {
       <div className='home-view'>
         <Navbar />
         home
+        <MapView />
       </div>
     )
   }
