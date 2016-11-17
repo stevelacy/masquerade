@@ -18,8 +18,8 @@ const globals = {
 }
 
 
-const lFolder = requireDir('./webpack/loaders')
-const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
+const lFolder = requireDir('./webpack/rules')
+const rules = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -33,9 +33,6 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  devServer: {
-    port: 5000
-  },
   resolve: {
     alias: {
       app: paths.src,
@@ -46,8 +43,8 @@ module.exports = {
       styles: path.resolve(paths.src, 'styles'),
       reducers: path.resolve(paths.src, 'reducers'),
       routes: path.resolve(paths.src, 'routes'),
-      'mapbox-gl/js/geo/transform': path.join(__dirname, "/node_modules/mapbox-gl/js/geo/transform"),
-      'mapbox-gl': path.join(__dirname, "/node_modules/mapbox-gl/dist/mapbox-gl.js")
+      'mapbox-gl/js/geo/transform': path.join(__dirname, '/node_modules/mapbox-gl/js/geo/transform'),
+      'mapbox-gl': path.join(__dirname, '/node_modules/mapbox-gl/dist/mapbox-gl.js')
     }
   },
   plugins: [
@@ -63,6 +60,6 @@ module.exports = {
     })
   ],
   module: {
-    loaders: loaders
+    rules: rules
   }
 }
