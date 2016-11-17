@@ -13,15 +13,31 @@ export default class MapView extends Component {
     super(props)
     this.state = {
       viewport: {
-        latitude: 37.7555,
-        longitude: -122.4375,
+        latitude: 33.446204,
+        longitude: -112.073388,
         zoom: 8,
-        width: 0
+        width: document.body.clientWidth
       }
     }
   }
 
   static displayName = 'MapView'
+
+  componentDidMount () {
+    window.addEventListener('resize', () =>
+      this.setState({
+        viewport: update(this.state.viewport, {
+          $merge: {
+            width: document.body.clientWidth
+          }
+        })
+      })
+    )
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize')
+  }
 
   handleViewportChange (viewport = {}) {
     this.setState({
@@ -29,18 +45,9 @@ export default class MapView extends Component {
     })
   }
 
-  handleMapLoad (e) {
-    if (!e) return
-    this.setState({
-      viewport: update(this.state.viewport, {$merge: { width: e.offsetWidth }})
-    })
-  }
-
   render() {
     return (
-      <div
-        ref={this.handleMapLoad}
-        className='map-view'>
+      <div className='map-view'>
         <MapGl
           height={400}
           mapStyle={mapStyle}
