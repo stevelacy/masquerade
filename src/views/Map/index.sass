@@ -1,2 +1,20 @@
 .map-view
   height: 100%
+
+  svg
+    path
+      animation: pulsate 2s infinite
+      fill: none
+
+@keyframes pulsate
+  0%
+    opacity: 0.4
+    stroke-width: 3
+
+  50%
+    opacity: 1.0
+    stroke-width: 5
+
+  100%
+    opacity: 0.4
+    stroke-width: 3
