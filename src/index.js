@@ -1,5 +1,6 @@
-import DOM from 'react-dom'
+import { render } from 'react-dom'
 import { history } from 'shasta-router'
+import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import store from 'core/store'
 import actions from 'core/actions'
@@ -8,5 +9,29 @@ import Root from 'views/Root'
 
 console.log('Actions:', actions)
 
-const rootNode = <Root history={history} store={store} routes={routes} />
-DOM.render(rootNode, document.getElementById('root'))
+render(
+  <AppContainer>
+    <Root
+      history={history}
+      store={store}
+      routes={routes}
+    />
+  </AppContainer>,
+  document.getElementById('root')
+)
+
+if (module.hot) {
+  module.hot.accept('./views/Root', () => {
+    const Root = require('./views/Root')
+    render(
+      <AppContainer>
+        <Root
+          history={history}
+          store={store}
+          routes={routes}
+        />
+      </AppContainer>,
+      document.getElementById('root')
+    )
+  })
+}

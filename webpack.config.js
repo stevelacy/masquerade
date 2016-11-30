@@ -6,11 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const package = require('./package')
 
 const paths = {
+  root: '/',
   src: 'src',
   dist: 'dist'
 }
 
 const globals = {
+  port: 5000,
   '__INITIAL_STATE__': JSON.stringify({}),
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
   '__DEV__': process.env.NODE_ENV === 'development', // used in react
@@ -25,7 +27,8 @@ module.exports = {
   context: path.resolve(__dirname),
   name: 'client',
   entry: [
-    path.resolve(__dirname, paths.src),
+    'react-hot-loader/patch',
+    path.resolve(__dirname, paths.src)
   ],
   devtool: 'source-map',
   output: {
@@ -57,9 +60,15 @@ module.exports = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.NamedModulesPlugin()
   ],
   module: {
     rules: rules
+  },
+  devServer: {
+    historyApiFallback: {verbose: true},
+    contentBase: paths.src,
+    port: globals.port
   }
 }

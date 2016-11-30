@@ -66,7 +66,7 @@ export default class MapView extends Component {
       <svg>
         <path
           xlinkHref='svg-line'
-          style={ {stroke: '#1FBAD6', strokeWidth: 2} }
+          style={ {stroke: '#1FBAD6'} }
           d={ `M${pointString}` } />
       </svg>
     )

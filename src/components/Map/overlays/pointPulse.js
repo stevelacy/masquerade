@@ -25,7 +25,7 @@ export default function svgPointPulse (opt) {
               begin="0s;animation1.start"
               dur="2s"
               repeatCount="indefinite"
-              from={opt.zoom - 5}
+              from={opt.zoom - 10}
               to={opt.zoom + 5}
             />
           </circle>

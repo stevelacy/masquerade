@@ -10,7 +10,8 @@ module.exports = [
       cacheDirectory: true,
       presets: babel.presets,
       plugins: [
-        ['transform-decorators-legacy']
+        'transform-decorators-legacy',
+        'react-hot-loader/babel'
       ]
     }
   }
