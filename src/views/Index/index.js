@@ -20,7 +20,7 @@ export default class IndexView extends Component {
     return (
       <div className='home-view'>
         <Navbar />
-        home views
+        home
         <MapView />
       </div>
     )

@@ -27,6 +27,8 @@ module.exports = {
   context: path.resolve(__dirname),
   name: 'client',
   entry: [
+    'webpack-dev-server/client?http://localhost:5000',
+    'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
     path.resolve(__dirname, paths.src)
   ],
@@ -51,6 +53,7 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin(globals),
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html'),
