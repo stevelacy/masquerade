@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'shasta-router'
+import { Link } from 'react-router'
 import { Component } from 'core'
 import DocumentMeta from 'react-document-meta'
 import Title from 'components/Title'

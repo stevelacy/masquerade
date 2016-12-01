@@ -1,19 +1,14 @@
 import { render } from 'react-dom'
-import { history } from 'shasta-router'
+import { browserHistory } from 'react-router'
 import { AppContainer } from 'react-hot-loader'
 import React from 'react'
-import store from 'core/store'
-import actions from 'core/actions'
 import routes from 'routes'
 import Root from 'views/Root'
-
-console.log('Actions:', actions)
 
 render(
   <AppContainer>
     <Root
-      history={history}
-      store={store}
+      history={browserHistory}
       routes={routes}
     />
   </AppContainer>,
@@ -26,8 +21,7 @@ if (module.hot) {
     render(
       <AppContainer>
         <Root
-          history={history}
-          store={store}
+          history={browserHistory}
           routes={routes}
         />
       </AppContainer>,

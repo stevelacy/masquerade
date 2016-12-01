@@ -1,7 +1,6 @@
 import React from 'react'
-import { Component, PropTypes, connect } from 'core'
+import { Component, PropTypes } from 'core'
 import classes from 'classnames'
-import actions from 'core/actions'
 import './index.sass'
 
 export default class Box extends Component {

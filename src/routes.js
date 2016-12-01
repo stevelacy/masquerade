@@ -1,6 +1,6 @@
 /* eslint react/forbid-prop-types: 0 */
 import React from 'react'
-import { Route, IndexRoute } from 'shasta-router'
+import { Route, IndexRoute } from 'react-router'
 
 import IndexView from 'views/Index'
 import NotFoundView from 'views/NotFound'
