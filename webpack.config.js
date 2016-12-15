@@ -64,7 +64,12 @@ module.exports = {
         collapseWhitespace: true
       }
     }),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new ExtractTextPlugin({
+      filename: '[name].[chunkhash].css',
+      disable: false,
+      allChunks: true
+    })
   ],
   module: {
     rules: rules

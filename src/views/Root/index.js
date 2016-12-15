@@ -2,12 +2,13 @@
 import React from 'react'
 import { Component, PropTypes } from 'core'
 import { BrowserRouter, Match, Miss } from 'react-router'
+import fixIt from 'react-fix-it'
 
 import IndexView from 'views/Index'
 import NotFoundView from 'views/NotFound'
 import 'styles/globals.sass'
 
-export default class RootView extends Component {
+class RootView extends Component {
   static displayName = 'RootView'
 
   componentWillMount() {
@@ -28,3 +29,5 @@ export default class RootView extends Component {
     )
   }
 }
+
+export default fixIt(RootView)
