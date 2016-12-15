@@ -1,15 +1,14 @@
 /* eslint react/forbid-prop-types: 0 */
 import React from 'react'
 import { Component, PropTypes } from 'core'
-import { Router } from 'react-router'
+import { BrowserRouter, Match, Miss } from 'react-router'
+
+import IndexView from 'views/Index'
+import NotFoundView from 'views/NotFound'
 import 'styles/globals.sass'
 
 export default class RootView extends Component {
   static displayName = 'RootView'
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    routes: PropTypes.node.isRequired
-  }
 
   componentWillMount() {
     console.time('First Render Time')
@@ -18,11 +17,14 @@ export default class RootView extends Component {
     console.timeEnd('First Render Time')
   }
   render() {
-    const { store, history, routes } = this.props
+    const { store } = this.props
     return (
-      <Router history={history}>
-        {routes}
-      </Router>
+      <BrowserRouter>
+        <div>
+          <Match exactly pattern='/' component={IndexView} />
+          <Miss component={NotFoundView} />
+        </div>
+      </BrowserRouter>
     )
   }
 }
