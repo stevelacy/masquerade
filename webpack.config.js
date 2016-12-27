@@ -35,7 +35,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, paths.dist),
-    filename: 'bundle.js',
+    filename: '[hash].[name].js',
     publicPath: '/'
   },
   resolve: {
@@ -69,6 +69,9 @@ module.exports = {
       filename: '[name].[chunkhash].css',
       disable: false,
       allChunks: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest']
     })
   ],
   module: {
