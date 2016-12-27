@@ -5,6 +5,7 @@ import { BrowserRouter, Match, Miss } from 'react-router'
 import fixIt from 'react-fix-it'
 
 import IndexView from 'views/Index'
+import ChartView from 'views/Charts'
 import NotFoundView from 'views/NotFound'
 import 'styles/globals.sass'
 
@@ -21,8 +22,13 @@ class RootView extends Component {
     const { store } = this.props
     return (
       <BrowserRouter>
-        <div>
+        <div
+          style={{
+            height: '100%',
+            width: '100%'
+          }}>
           <Match exactly pattern='/' component={IndexView} />
+          <Match pattern='/charts' component={ChartView} />
           <Miss component={NotFoundView} />
         </div>
       </BrowserRouter>
