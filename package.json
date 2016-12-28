@@ -5,7 +5,7 @@
   "scripts": {
     "test": "NODE_ENV=testing mocha --compilers js:babel-core/register test/index.js 'test/**/*.js'",
     "lint": "eslint . ./",
-    "start": "NODE_ENV=development nodemon --watch webpack.config.js --watch ./devserver --watch package.json --watch webpack/rules/ devserver.js",
+    "start": "NODE_ENV=development nodemon --watch webpack.config.js --watch devserver.js --watch package.json --watch webpack/rules/ devserver.js",
     "compile": "npm run test && DEBUG=app:* NODE_ENV=production BUILD=TRUE ./node_modules/.bin/webpack --display-error-details",
     "deploy": "rm -rf dist && npm run compile && convox deploy"
   },
@@ -60,9 +60,12 @@
     "recharts": "^0.19.1",
     "require-dir": "^0.3.1",
     "sass-loader": "^4.0.2",
+    "standard-loader": "^5.0.0",
     "style-loader": "^0.13.1",
     "webpack": "2.2.0-rc.0",
-    "webpack-dev-server": "~2.1.0-beta.0"
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-dev-server": "~2.1.0-beta.0",
+    "webpack-hot-middleware": "^2.14.0"
   },
   "babel": {
     "presets": [
@@ -95,7 +98,10 @@
     "rules": {
       "react/display-name": 1,
       "react/jsx-boolean-value": 1,
-      "react/jsx-curly-spacing": 1,
+      "jsx-curly-spacing": [
+        2,
+        "always"
+      ],
       "react/jsx-equals-spacing": 1,
       "react/jsx-key": 1,
       "react/jsx-no-duplicate-props": 1,
@@ -122,7 +128,7 @@
       "jsx-quotes": 0,
       "space-before-function-paren": 0,
       "array-bracket-spacing": 0,
-      "object-curly-spacing": 0,
+      "object-curly-spacing": 1,
       "semi": [
         2,
         "never"

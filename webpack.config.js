@@ -72,6 +72,14 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest']
+    }),
+    new webpack.LoaderOptionsPlugin({
+      test: /\.js?$/,
+      options: {
+        standard: {
+          parser: 'babel-eslint'
+        }
+      }
     })
   ],
   module: {
