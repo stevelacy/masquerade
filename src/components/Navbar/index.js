@@ -1,12 +1,12 @@
 import React from 'react'
-import { PropTypes, Component } from 'core'
+import { Component } from 'core'
 import classNames from 'classnames'
 import './index.sass'
 
 export class Navbar extends Component {
   static displayName = 'Navbar'
 
-  render() {
+  render () {
     const ourClass = classNames('navbar-component', this.props.className)
     return <div {...this.props} className={ourClass} />
   }

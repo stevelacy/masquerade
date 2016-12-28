@@ -13,24 +13,23 @@ export default function svgPointPulse (opt) {
             fill='#1FBAD6'
             key={pos}>
             <animate
-              id="animation1"
-              attributeName="opacity"
-              begin="0s"
-              dur="2s"
-              repeatCount="indefinite"
-              values="1;0"
+              id='animation1'
+              attributeName='opacity'
+              begin='0s'
+              dur='2s'
+              repeatCount='indefinite'
+              values='1;0'
             />
             <animate
-              attributeName="r"
-              begin="0s;animation1.start"
-              dur="2s"
-              repeatCount="indefinite"
+              attributeName='r'
+              begin='0s;animation1.start'
+              dur='2s'
+              repeatCount='indefinite'
               from={opt.zoom - 10}
               to={opt.zoom + 5}
             />
           </circle>
-          }
-        )
+        })
       }
     </g>
   )

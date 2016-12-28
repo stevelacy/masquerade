@@ -9,7 +9,7 @@ export class Title extends Component {
     className: PropTypes.string,
     uppercase: PropTypes.bool
   }
-  render() {
+  render () {
     const ourClass = classNames('title-component', this.props.className, {
       uppercase: this.props.uppercase
     })

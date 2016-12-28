@@ -1,0 +1,25 @@
+@import '~styles/colors'
+
+.sidebar-component
+  width: 200px
+  height: 100%
+  display: flex
+  background: $color-darkgrey
+  color: $color-white
+  flex-direction: column
+  text-align: center
+  text-transform: uppercase
+  .sidebar-header, .link-item
+    color: $color-white
+    text-decoration: none
+  .sidebar-header
+    padding: 20px
+    height: 100px
+  .link-item
+    padding: 10px 15px
+    border-left: 2px solid $color-transparent
+    &:hover
+      background: lighten($color-darkgrey, 20%)
+    &.active
+      border-left: 2px solid $color-teal
+      background: lighten($color-darkgrey, 5%)
