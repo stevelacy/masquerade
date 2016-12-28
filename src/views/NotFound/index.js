@@ -6,7 +6,7 @@ import Title from 'components/Title'
 
 export default class NotFoundView extends Component {
   static displayName = 'NotFoundView'
-  render() {
+  render () {
     return (
       <div>
         <DocumentMeta title='404 - Not Found' />

@@ -29,10 +29,10 @@ export default class SVGOverlay extends Component {
     return (
       <svg
         ref='overlay'
-        width={ width }
-        height={ height }
-        style={ style }>
-        { this.props.redraw({
+        width={width}
+        height={height}
+        style={style}>
+        {this.props.redraw({
           ...this.props,
           project,
           unproject

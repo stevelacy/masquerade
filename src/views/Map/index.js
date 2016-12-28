@@ -11,7 +11,6 @@ import './index.sass'
 const accessToken = 'pk.eyJ1Ijoic3RldmVsYWN5IiwiYSI6ImNpdmtpejc4NTA4NmUyb2x2YTB5cnlremgifQ.KsPYeRPvv5AJKF3g84LOHg'
 const mapStyle = 'mapbox://styles/stevelacy/civkk44n1007t2kqqewcqsa4k'
 
-
 export default class MapView extends Component {
   constructor (props) {
     super(props)
@@ -20,8 +19,8 @@ export default class MapView extends Component {
         latitude: 33.446204,
         longitude: -112.073388,
         zoom: 8,
-        width: document.body.clientWidth,
-        height: 400
+        width: 0,
+        height: 0
       },
       locations: fromJS([
         [-112.023856, 33.535649],
@@ -35,15 +34,7 @@ export default class MapView extends Component {
   static displayName = 'MapView'
 
   componentDidMount () {
-    window.addEventListener('resize', () =>
-      this.setState({
-        viewport: update(this.state.viewport, {
-          $merge: {
-            width: document.body.clientWidth
-          }
-        })
-      })
-    )
+    window.addEventListener('resize', this.setBounds)
   }
 
   componentWillUnmount () {
@@ -53,6 +44,18 @@ export default class MapView extends Component {
   handleViewportChange (viewport = {}) {
     this.setState({
       viewport: update(this.state.viewport, { $merge: viewport })
+    })
+  }
+
+  setBounds (element) {
+    console.log(element.clientWidth)
+    this.setState({
+      viewport: update(this.state.viewport, {
+        $merge: {
+          height: element.clientHeight,
+          width: element.clientWidth
+        }
+      })
     })
   }
 
@@ -66,15 +69,15 @@ export default class MapView extends Component {
       <svg>
         <path
           xlinkHref='svg-line'
-          style={ {stroke: '#1FBAD6'} }
-          d={ `M${pointString}` } />
+          style={{stroke: '#1FBAD6'}}
+          d={`M${pointString}`} />
       </svg>
     )
   }
 
-  render() {
+  render () {
     return (
-      <div className='map-view'>
+      <div className='map-view' ref={this.setBounds}>
         <MapGl
           mapStyle={mapStyle}
           mapboxApiAccessToken={accessToken}
@@ -96,13 +99,13 @@ export default class MapView extends Component {
             locations={this.state.locations}
             dotRadius={6}
             globalOpacity={1}
-            compositeOperation="screen"
-            dotFill="#53dee4"
-            renderWhileDragging={true}
+            compositeOperation='screen'
+            dotFill='#53dee4'
+            renderWhileDragging
             isDragging={false}
           />
-          </MapGl>
-        </div>
-      )
+        </MapGl>
+      </div>
+    )
   }
 }
