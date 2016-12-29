@@ -10,7 +10,7 @@ export class Loader extends Component {
     full: PropTypes.bool
   }
   render () {
-    const { full, ...rest} = this.props
+    const { full, ...rest } = this.props
     const ourClass = classNames('loader-component', this.props.className, {
       full
     })

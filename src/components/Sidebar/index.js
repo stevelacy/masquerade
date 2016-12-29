@@ -31,7 +31,7 @@ export class Sidebar extends Component {
           className='sidebar-header'>
           home
         </Link>
-        {this.props.links.map(this.renderLink)}
+        {links.map(this.renderLink)}
       </div>
     )
   }

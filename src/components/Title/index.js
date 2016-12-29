@@ -10,10 +10,11 @@ export class Title extends Component {
     uppercase: PropTypes.bool
   }
   render () {
+    const { uppercase, ...reset } = this.props
     const ourClass = classNames('title-component', this.props.className, {
-      uppercase: this.props.uppercase
+      uppercase
     })
-    return <div {...this.props} className={ourClass} />
+    return <div {...reset} className={ourClass} />
   }
 }
 
