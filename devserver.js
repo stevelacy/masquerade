@@ -25,8 +25,7 @@ app.get('/v1/sources', (req, res) => {
 })
 
 app.use(apiFallback({
-  verbose: true,
-  disableDotRule: true
+  verbose: true
 }))
 app.use(WebpackDevMiddleware(compiler, config.devServer))
 app.use(WebpackHotMiddleware(compiler))
