@@ -27,7 +27,7 @@ class RootView extends Component {
   static displayName = 'RootView'
   static defaultState = {
     loaded: false,
-    body: []
+    sources: []
   }
 
   componentWillMount () {
@@ -70,12 +70,12 @@ class RootView extends Component {
             <Match exactly pattern='/' component={IndexView} />
             <Match
               pattern='/sources'
-              render={(props) =>
+              render={() =>
                 <SourcesView sources={this.state.sources} />
               } />
             <Match
               pattern='/settings'
-              render={(props) =>
+              render={() =>
                 <SettingsView />
               } />
             <Miss component={NotFoundView} />

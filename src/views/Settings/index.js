@@ -13,20 +13,6 @@ export default class SettingsView extends Component {
   static defaultProps = {
   }
 
-  renderSource (source) {
-    return (
-      <Flex
-        p={2}
-        className='source-box'
-        align='center'
-        mt={1}
-        key={source.name}>
-          <Box col={3} p={1}> {source.name} </Box>
-          <FlexImg col={3} p={2} src={source.image} className='source-image' />
-      </Flex>
-    )
-  }
-
   render () {
     return (
       <Flex column p={2} className='settings-view'>
