@@ -27,8 +27,7 @@ module.exports = {
   context: path.resolve(__dirname),
   name: 'client',
   entry: [
-    'webpack-dev-server/client?http://localhost:5000',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client?http://localhost:5000',
     'react-hot-loader/patch',
     path.resolve(__dirname, paths.src)
   ],
@@ -88,6 +87,11 @@ module.exports = {
   devServer: {
     historyApiFallback: {verbose: true},
     contentBase: paths.src,
-    port: globals.port
+    port: globals.port,
+    hot: true,
+    publicPath: '/',
+    stats: {
+      colors: true
+    }
   }
 }
