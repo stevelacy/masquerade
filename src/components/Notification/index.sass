@@ -1,0 +1,25 @@
+@import '~styles/colors'
+
+.notification-component
+  display: flex
+  position: fixed
+  right: 0
+  bottom: 0
+  left: 0
+  height: 50px
+  background: $color-teal
+  color: $color-white
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  animation: fadeIn 1s
+  .notification-title
+    display: block
+  &.error
+    background: $color-red
+  &.info
+    background: $color-blue
+  &.warning
+    background: $color-yellow
+  &.success
+    background: $color-green

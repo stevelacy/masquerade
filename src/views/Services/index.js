@@ -9,10 +9,10 @@ const FlexImg = withReflex()((props) => <img {...props} />)
 export default class SourcesView extends Component {
   static displayName = 'SourcesView'
   static propTypes = {
-    sources: PropTypes.array.isRequired
+    services: PropTypes.array.isRequired
   }
   static defaultProps = {
-    sources: []
+    services: []
   }
 
   renderSource (source) {
@@ -31,12 +31,12 @@ export default class SourcesView extends Component {
 
   render () {
     return (
-      <Flex column p={2} className='sources-view'>
-        <Title uppercase>enabled sources </Title>
+      <Flex column p={2} className='services-view'>
+        <Title uppercase>enabled services </Title>
         <Flex
           column
           mt={2}>
-          {this.props.sources.map(this.renderSource)}
+          {this.props.services.map(this.renderSource)}
         </Flex>
       </Flex>
     )

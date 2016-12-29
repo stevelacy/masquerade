@@ -9,7 +9,7 @@ const config = require('./webpack.config')
 const app = express()
 const compiler = webpack(config)
 
-app.get('/v1/sources', (req, res) => {
+app.get('/v1/services', (req, res) => {
   setTimeout(() => {
     res.json([
       {

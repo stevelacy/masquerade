@@ -5,18 +5,19 @@ import { BrowserRouter, Match, Miss } from 'react-router'
 import TransitionGroup from 'react-addons-css-transition-group'
 import css from 'classnames'
 import IndexView from 'views/Index'
-import SourcesView from 'views/Sources'
+import ServicesView from 'views/Services'
 import SettingsView from 'views/Settings'
 import NotFoundView from 'views/NotFound'
 import Sidebar from 'components/Sidebar'
 import Loader from 'components/Loader'
+import Notification from 'components/Notification'
 import 'styles/globals.sass'
 import './index.sass'
 
 const links = [
   {
-    href: '/sources',
-    text: 'sources'
+    href: '/services',
+    text: 'services'
   },
   {
     href: '/settings',
@@ -28,33 +29,47 @@ class RootView extends Component {
   static displayName = 'RootView'
   static defaultState = {
     loaded: false,
-    sources: []
+    services: [],
+    notification: {
+      title: null,
+      message: null
+    }
   }
-
   componentWillMount () {
     console.time('First Render Time')
-    window.fetch('/v1/sources')
+    window.fetch('/v1/services')
       .then(res => res.json())
       .then((body) => {
         console.log(body)
         this.setState({
           loaded: true,
-          sources: body
+          services: body
         })
       })
       .catch((err) => {
-        this.setState({
-          error: err
+        this.actions().notification.create({
+          title: 'Error',
+          message: String(err),
+          type: 'error'
         })
       })
   }
   componentDidMount () {
     console.timeEnd('First Render Time')
   }
-  render () {
-    if (this.state.error) {
-      return <div> {this.state.error} </div>
+  actions () {
+    return {
+      notification: {
+        create: (notification) => {
+          this.setState({ notification })
+        },
+        cancel: () => {
+          this.setState({ notification: {} })
+        }
+      }
     }
+  }
+  render () {
     return (
       <BrowserRouter>
         <div
@@ -67,12 +82,15 @@ class RootView extends Component {
           </TransitionGroup>
 
           <Sidebar links={links} />
+          <Notification
+            cancel={this.actions().notification.cancel}
+            notification={this.state.notification} />
           <div className={css('content-view')}>
             <Match exactly pattern='/' component={IndexView} />
             <Match
-              pattern='/sources'
+              pattern='/services'
               render={() =>
-                <SourcesView sources={this.state.sources} />
+                <ServicesView services={this.state.services} />
               } />
             <Match
               pattern='/settings'
