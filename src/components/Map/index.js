@@ -1,9 +1,9 @@
 import React from 'react'
-import { Component } from 'core'
+import { Component, PropTypes } from 'core'
 import update from 'immutability-helper'
 import MapGl from 'react-map-gl'
 import ScatterPlotOverlay from 'react-map-gl/dist/overlays/scatterplot.react'
-import SvgOverlay from './SVGOverlay'
+import SvgOverlay from './overlays/SVGOverlay'
 import pointPulse from 'components/Map/overlays/pointPulse'
 import { fromJS } from 'immutable'
 import './index.sass'
@@ -19,43 +19,36 @@ export default class MapView extends Component {
         latitude: 33.446204,
         longitude: -112.073388,
         zoom: 8,
-        width: 0,
-        height: 0
+        height: props.height,
+        width: props.width
       },
-      locations: fromJS([
-        [-112.023856, 33.535649],
-        [-112.030343, 33.512322],
-        [-112.049836, 33.565902],
-        [-112.158856, 33.549022]
-      ])
+      locations: props.locations
     }
   }
 
   static displayName = 'MapView'
-
-  componentDidMount () {
-    window.addEventListener('resize', this.setBounds)
+  static propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired
+  }
+  static defaultProps = {
+    locations: fromJS([])
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('resize')
+  componentWillUpdate ({ width, height }) {
+    if (width === this.state.viewport.width) return
+    this.setState({
+      viewport: update(this.state.viewport, {
+        $merge: {
+          height, width
+        }
+      })
+    })
   }
 
   handleViewportChange (viewport = {}) {
     this.setState({
       viewport: update(this.state.viewport, { $merge: viewport })
-    })
-  }
-
-  setBounds (element) {
-    console.log(element.clientWidth)
-    this.setState({
-      viewport: update(this.state.viewport, {
-        $merge: {
-          height: element.clientHeight,
-          width: element.clientWidth
-        }
-      })
     })
   }
 
@@ -77,7 +70,7 @@ export default class MapView extends Component {
 
   render () {
     return (
-      <div className='map-view' ref={this.setBounds}>
+      <div className='map-view'>
         <MapGl
           mapStyle={mapStyle}
           mapboxApiAccessToken={accessToken}
