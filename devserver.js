@@ -1,3 +1,4 @@
+require('babel-core/register')
 const webpack = require('webpack')
 const express = require('express')
 const WebpackDevServer = require('webpack-dev-server')

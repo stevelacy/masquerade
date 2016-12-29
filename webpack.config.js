@@ -3,7 +3,8 @@ const requireDir = require('require-dir')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const package = require('./package')
+const pkg = require('./package')
+const config = require('./config')
 
 const paths = {
   root: '/',
@@ -11,10 +12,12 @@ const paths = {
   dist: 'dist'
 }
 
+const env = process.env.NODE_ENV || 'development'
+
 const globals = {
   port: 5000,
-  '__INITIAL_STATE__': JSON.stringify({}),
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+  '__config__': JSON.stringify(config[env]),
+  'process.env.NODE_ENV': JSON.stringify(env),
   '__DEV__': process.env.NODE_ENV === 'development', // used in react
   '__PROD__': process.env.NODE_ENV === 'production' // used in react
 }
@@ -40,6 +43,7 @@ module.exports = {
   resolve: {
     alias: {
       app: paths.src,
+      config: './config',
       views: path.resolve(paths.src, 'views'),
       core: path.resolve(paths.src, 'core'),
       components: path.resolve(paths.src, 'components'),
@@ -57,7 +61,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.src, 'index.html'),
       favicon: path.join(paths.src, 'assets/favicon.ico'),
-      title: package.name,
+      title: pkg.name,
       inject: 'body',
       minify: {
         collapseWhitespace: true

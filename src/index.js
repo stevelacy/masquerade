@@ -3,6 +3,10 @@ import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import Root from 'views/Root'
 
+/*eslint-disable */
+window.config = __config__
+/*eslint-enable */
+
 render(
   <AppContainer>
     <Root />

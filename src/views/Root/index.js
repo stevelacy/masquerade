@@ -37,7 +37,7 @@ class RootView extends Component {
   }
   componentWillMount () {
     console.time('First Render Time')
-    window.fetch('/v1/services')
+    window.fetch(window.config.api + '/services')
       .then(res => res.json())
       .then((body) => {
         console.log(body)
