@@ -1,10 +1,8 @@
 import React from 'react'
-import { Component, PropTypes } from 'core'
-import { Flex, Box, withReflex } from 'reflexbox'
+import { Component } from 'core'
+import { Flex } from 'reflexbox'
 import Title from 'components/Title'
 import './index.sass'
-
-const FlexImg = withReflex()((props) => <img {...props} />)
 
 export default class SettingsView extends Component {
   static displayName = 'SettingsView'

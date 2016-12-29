@@ -1,4 +1,5 @@
 import React from 'react'
+import window from 'global'
 import { Component } from 'core'
 import { BrowserRouter, Match, Miss } from 'react-router'
 import TransitionGroup from 'react-addons-css-transition-group'
@@ -32,7 +33,7 @@ class RootView extends Component {
 
   componentWillMount () {
     console.time('First Render Time')
-    fetch('/v1/sources')
+    window.fetch('/v1/sources')
       .then(res => res.json())
       .then((body) => {
         console.log(body)

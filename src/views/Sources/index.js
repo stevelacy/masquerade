@@ -23,8 +23,8 @@ export default class SourcesView extends Component {
         align='center'
         mt={1}
         key={source.name}>
-          <Box col={3} p={1}> {source.name} </Box>
-          <FlexImg col={3} p={2} src={source.image} className='source-image' />
+        <Box col={3} p={1}> {source.name} </Box>
+        <FlexImg col={3} p={2} src={source.image} className='source-image' />
       </Flex>
     )
   }
