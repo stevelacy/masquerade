@@ -12,7 +12,7 @@ render(
 
 if (module.hot) {
   module.hot.accept('./views/Root', () => {
-    const Root = require('./views/Root')
+    const Root = require('./views/Root').default
     render(
       <AppContainer>
         <Root />
