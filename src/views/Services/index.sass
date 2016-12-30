@@ -2,13 +2,15 @@
 
 .services-view
   width: 100%
-  .source-box
-    box-shadow: 0 1px 5px $color-shadow
-    text-align: center
-    border: 1px solid $color-lightgrey
-    &:hover
-      box-shadow: 0 1px 8px $color-shadow
-
-    .source-image
-      max-height: 100px
-      max-width: 100px
+  .services-table
+    background: $color-white
+    .source-box
+      box-shadow: 0 1px 2px $color-shadow
+      text-align: center
+      transition: background-color .3s
+      &:hover
+        box-shadow: 0 1px 3px $color-shadow
+        background: darken($color-white, 5%)
+      .source-image
+        max-height: 100px
+        max-width: 100px

@@ -24,7 +24,6 @@ export default class SourcesView extends Component {
         p={2}
         className='source-box'
         align='center'
-        mt={1}
         key={source.name}>
         <Box col={3} p={1}> {source.name} </Box>
         <Toggle
@@ -36,9 +35,11 @@ export default class SourcesView extends Component {
   render () {
     return (
       <Flex column p={2} className='services-view'>
-        <Title uppercase>enabled services </Title>
+        <Title>Enabled Services </Title>
         <Flex
+          className='services-table'
           column
+          p={2}
           mt={2}>
           {this.props.services.map(this.renderSource)}
         </Flex>

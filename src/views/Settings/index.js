@@ -14,7 +14,7 @@ export default class SettingsView extends Component {
   render () {
     return (
       <Flex column p={2} className='settings-view'>
-        <Title uppercase>settings </Title>
+        <Title>System Settings </Title>
       </Flex>
     )
   }

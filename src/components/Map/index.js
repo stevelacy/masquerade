@@ -2,9 +2,12 @@ import React from 'react'
 import { Component, PropTypes } from 'core'
 import update from 'immutability-helper'
 import MapGl from 'react-map-gl'
+import TransitionGroup from 'react-addons-css-transition-group'
 import ScatterPlotOverlay from 'react-map-gl/dist/overlays/scatterplot.react'
 import SvgOverlay from './overlays/SVGOverlay'
-import pointPulse from 'components/Map/overlays/pointPulse'
+import MapNavOverlay from './overlays/MapNavOverlay'
+import MapLoader from './overlays/MapLoader'
+import pointPulse from './overlays/pointPulse'
 import { fromJS } from 'immutable'
 import './index.sass'
 
@@ -34,6 +37,9 @@ export default class MapView extends Component {
   static defaultProps = {
     locations: fromJS([])
   }
+  static defaultState = {
+    loaded: true
+  }
 
   componentWillUpdate ({ width, height }) {
     if (width === this.state.viewport.width) return
@@ -44,6 +50,11 @@ export default class MapView extends Component {
         }
       })
     })
+  }
+
+  handleLoad () {
+    // TODO: Enable this once react-map-gl lands the onLoad function
+    this.setState({ loaded: true })
   }
 
   handleViewportChange (viewport = {}) {
@@ -72,6 +83,7 @@ export default class MapView extends Component {
     return (
       <div className='map-view'>
         <MapGl
+          onLoad={this.handleLoad}
           mapStyle={mapStyle}
           mapboxApiAccessToken={accessToken}
           onChangeViewport={this.handleViewportChange}
@@ -97,6 +109,13 @@ export default class MapView extends Component {
             renderWhileDragging
             isDragging={false}
           />
+          <MapNavOverlay />
+          <TransitionGroup
+            transitionName='loader-animation'
+            transitionEnterTimeout={0}
+            transitionLeaveTimeout={1000}>
+            {this.state.loaded && <MapLoader />}
+          </TransitionGroup>
         </MapGl>
       </div>
     )

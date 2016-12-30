@@ -1,0 +1,33 @@
+@import '~styles/colors'
+
+.map-nav-overlay-component
+  position: absolute
+  top: 10px
+  left: 10px
+  display: flex
+  align-items: center
+  background: $color-lightestgrey
+  box-shadow: 0 1px 5px $color-shadow
+  border-radius: 2px
+  transition: box-shadow .3s
+  &:hover
+    box-shadow: 0 1px 10px $color-shadow
+  .nav-button
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 0 10px
+    height: 34px
+    min-width: 34px
+    box-shadow: 0 0 2px $color-shadow
+    cursor: pointer
+    font-size: 16px
+    border-right: 1px solid $color-lightgrey
+    transition: background-color .3s
+    &.active
+      color: $color-blue
+    &:hover
+      background: darken($color-lightestgrey, 5%)
+    &:last-child
+      border-right: 1px solid $color-transparent
+
