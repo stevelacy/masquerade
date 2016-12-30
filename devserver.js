@@ -25,9 +25,7 @@ app.get('/v1/services', (req, res) => {
   }, 1000)
 })
 
-app.use(apiFallback({
-  verbose: true
-}))
+app.use(apiFallback())
 app.use(WebpackDevMiddleware(compiler, config.devServer))
 app.use(WebpackHotMiddleware(compiler))
 
