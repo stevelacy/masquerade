@@ -17,11 +17,13 @@ import './index.sass'
 const links = [
   {
     href: '/services',
-    text: 'services'
+    text: 'services',
+    icon: 'server'
   },
   {
     href: '/settings',
-    text: 'settings'
+    text: 'settings',
+    icon: 'cogs'
   }
 ]
 

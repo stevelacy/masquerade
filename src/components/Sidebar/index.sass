@@ -7,19 +7,23 @@
   background: $color-darkgrey
   color: $color-white
   flex-direction: column
-  text-align: center
   text-transform: uppercase
   .sidebar-header, .link-item
     color: $color-white
     text-decoration: none
   .sidebar-header
     padding: 20px
-    height: 100px
+    margin: 10px 10px 20px
+    border-bottom: 1px solid $color-grey
+    text-align: center
   .link-item
     padding: 10px 15px
     border-left: 2px solid $color-transparent
+    transition: background-color .3s
     &:hover
-      background: lighten($color-darkgrey, 20%)
+      background: lighten($color-darkgrey, 5%)
     &.active
       border-left: 2px solid $color-teal
-      background: lighten($color-darkgrey, 5%)
+      background: lighten($color-darkgrey, 10%)
+    .fa
+      margin-right: 10px

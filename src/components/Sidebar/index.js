@@ -1,6 +1,7 @@
 import React from 'react'
 import { PropTypes, Component } from 'core'
 import { Link } from 'react-router'
+import { Icon } from 'react-fa'
 import css from 'classnames'
 import './index.sass'
 
@@ -17,6 +18,7 @@ export class Sidebar extends Component {
         key={opts.href}
         className={css('link-item')}
         to={opts.href}>
+        <Icon name={opts.icon} />
         {opts.text}
       </Link>
     )
