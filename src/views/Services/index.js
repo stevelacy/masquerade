@@ -1,6 +1,7 @@
 import React from 'react'
 import { Component, PropTypes } from 'core'
 import { Flex, Box, withReflex } from 'reflexbox'
+import Toggle from 'components/Toggle'
 import Title from 'components/Title'
 import './index.sass'
 
@@ -14,7 +15,9 @@ export default class SourcesView extends Component {
   static defaultProps = {
     services: []
   }
-
+  onToggle (source, enabled) {
+    console.log(source, enabled)
+  }
   renderSource (source) {
     return (
       <Flex
@@ -24,11 +27,12 @@ export default class SourcesView extends Component {
         mt={1}
         key={source.name}>
         <Box col={3} p={1}> {source.name} </Box>
-        <FlexImg col={3} p={2} src={source.image} className='source-image' />
+        <Toggle
+          checked={source.enabled}
+          onChange={(enabled) => this.onToggle(source, enabled)} />
       </Flex>
     )
   }
-
   render () {
     return (
       <Flex column p={2} className='services-view'>
