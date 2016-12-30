@@ -1,7 +1,7 @@
 module.exports = [
   {
     test: /\.woff(\?.*)?$/,
-    loader: 'url',
+    loader: 'url-loader',
     query: {
       prefix: 'fonts/',
       name: '[path][name].[ext]',
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     test: /\.woff2(\?.*)?$/,
-    loader: 'url',
+    loader: 'url-loader',
     query: {
       prefix: 'fonts/',
       name: '[path][name].[ext]',
@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     test: /\.ttf(\?.*)?$/,
-    loader: 'url',
+    loader: 'url-loader',
     query: {
       prefix: 'fonts/',
       name: '[path][name].[ext]',
@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     test: /\.eot(\?.*)?$/,
-    loader: 'file',
+    loader: 'url-loader',
     query: {
       prefix: 'fonts/',
       name: '[path][name].[ext]'
@@ -39,7 +39,7 @@ module.exports = [
   },
   {
     test: /\.svg(\?.*)?$/,
-    loader: 'url',
+    loader: 'url-loader',
     query: {
       prefix: 'fonts/',
       name: '[path][name].[ext]',
