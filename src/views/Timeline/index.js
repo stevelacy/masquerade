@@ -1,5 +1,5 @@
 import React from 'react'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import { Component } from 'core'
 import TimeAgo from 'react-timeago'
 import css from 'classnames'
@@ -24,6 +24,20 @@ const events = fromJS([
   },
   {
     id: 'event-123',
+    name: 'Checked in at Piestewa Peak',
+    image: 'http://1.bp.blogspot.com/-zqeUtxb6ags/UH-QdDASWjI/AAAAAAAAGiU/Tcs-O3VkrTc/s1600/DSCN2051.JPG',
+    userId: '1',
+    source: 'facebook',
+    dateRecorded: 'Mon Dec 30 2016 14:30:33 GMT-0700 (MST)',
+    location: {
+      id: 'loc-12',
+      lat: 33.547367,
+      lon: -112.020838,
+      name: 'Piestewa Peak'
+    }
+  },
+  {
+    id: 'event-122',
     name: 'Checked in at Infusion Coffee and Tea',
     image: 'http://st.hzcdn.com/simgs/78b187e201acf913_4-3324/industrial-espresso-coffee-machines.jpg',
     userId: '1',
@@ -48,13 +62,47 @@ const events = fromJS([
 
 export default class TimelineView extends Component {
   static displayName = 'TimelineView'
+  static defaultState = {
+    events: List([])
+  }
 
-  renderEvent (opts) {
+  componentDidMount () {
+    this.setState({ events })
+  }
+
+  renderEvent (opts, index) {
+    const next = this.state.events.get(index + 1)
+    const prior = this.state.events.get(index - 1)
+    const currentDate = new Date(opts.get('dateRecorded'))
+
+    let groupPrior = false
+    // let groupNext = false
+
+    if (prior && index - 1 >= 0) {
+      const date = new Date(prior.get('dateRecorded'))
+      const diff = (date - currentDate) / 1000 / 60 / 60
+      console.log(diff)
+      if (diff < 2) {
+        groupPrior = true
+      }
+    }
+    // if (next) {
+    //   const date = new Date(next.get('dateRecorded'))
+    //   const diff = (currentDate - date) / 1000 / 60 / 60
+    //   if (diff < 2) {
+    //     groupNext = true
+    //   }
+    // }
+
+    const eventBreak = <div className='event-prefix'>
+      <div className='event-break' />
+      <TimeAgo date={opts.get('dateRecorded')} />
+      <div className='event-break small' />
+    </div>
+
     return (
       <div className='event-component' key={opts.get('id')}>
-        <div className='event-prefix break' />
-        <TimeAgo date={opts.get('dateRecorded')} />
-        <div className='event-prefix' />
+        {groupPrior ? <div className='event-break small' /> : eventBreak}
         <div className='event-content'>
           <div
             style={{
@@ -71,7 +119,7 @@ export default class TimelineView extends Component {
             with -
             {opts.get('friends').map((friend, i) => {
               return (
-                <span className='event-friends'>
+                <span className='event-friends' key={i}>
                   {i > 0 && ', '}
                   {friend.get('name')}
                 </span>
@@ -89,7 +137,7 @@ export default class TimelineView extends Component {
       <div className='timeline-view'>
         <div className='events-component'>
           <Title> Timeline </Title>
-          {events.map(this.renderEvent)}
+          {this.state.events.map(this.renderEvent)}
         </div>
       </div>
     )
