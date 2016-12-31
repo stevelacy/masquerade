@@ -8,13 +8,20 @@ import { Icon } from 'react-fa'
 import Title from 'components/Title'
 import './index.sass'
 
+const serviceIcons = {
+  facebook: true,
+  foursquare: true,
+  github: true,
+  swarm: false
+}
+
 const eventsSource = fromJS([
   {
     id: 'event-124',
     name: 'Checked in at Pomo Pizzeria',
     image: 'https://lh3.googleusercontent.com/-IKQiZ5dzkZo/Vo2bCRTsv8I/AAAAAAAAACE/KgUXc80kHssjC4VnDAvqax6yId1_e4T2ACJkC/w80-h92-p-k-no/',
     userId: '1',
-    source: 'foursquare',
+    service: 'swarm',
     dateRecorded: 'Fri Dec 30 2016 15:45:33 GMT-0700 (MST)',
     location: {
       id: 'loc-13',
@@ -28,7 +35,7 @@ const eventsSource = fromJS([
     name: 'Checked in at Piestewa Peak',
     image: 'http://1.bp.blogspot.com/-zqeUtxb6ags/UH-QdDASWjI/AAAAAAAAGiU/Tcs-O3VkrTc/s1600/DSCN2051.JPG',
     userId: '1',
-    source: 'facebook',
+    service: 'facebook',
     dateRecorded: 'Fri Dec 30 2016 15:00:33 GMT-0700 (MST)',
     location: {
       id: 'loc-12',
@@ -42,7 +49,7 @@ const eventsSource = fromJS([
     name: 'Checked in at Infusion Coffee and Tea',
     image: 'http://st.hzcdn.com/simgs/78b187e201acf913_4-3324/industrial-espresso-coffee-machines.jpg',
     userId: '1',
-    source: 'facebook',
+    service: 'swarm',
     dateRecorded: 'Mon Dec 25 2016 15:59:33 GMT-0700 (MST)',
     location: {
       id: 'loc-12',
@@ -64,7 +71,7 @@ const eventsSource = fromJS([
     name: 'Checked in at Infusion Coffee and Tea',
     image: 'http://st.hzcdn.com/simgs/78b187e201acf913_4-3324/industrial-espresso-coffee-machines.jpg',
     userId: '1',
-    source: 'facebook',
+    service: 'facebook',
     dateRecorded: 'Fri Dec 23 2016 15:59:33 GMT-0700 (MST)',
     location: {
       id: 'loc-12',
@@ -96,6 +103,11 @@ export default class TimelineView extends Component {
   }
 
   renderEvent (opts, index) {
+    const service = opts.get('service')
+    const serviceIcon = serviceIcons[service] ?
+      <Icon name={service} /> :
+      <div> {String(service.charAt(0)).toUpperCase()} </div>
+
     return (
       <div className='event-content' key={opts.get('id')}>
         <div
@@ -103,8 +115,10 @@ export default class TimelineView extends Component {
             backgroundImage: `url(${opts.get('image')})`
           }}
           className='event-image'>
-          <div className={css('event-source-image', opts.get('source'))}>
-            <Icon name={opts.get('source')} />
+          <div
+            title={service}
+            className={css('event-service-image', service)}>
+            {serviceIcon}
           </div>
         </div>
 
