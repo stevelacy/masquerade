@@ -1,11 +1,8 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { Icon } from 'react-fa'
 import './index.sass'
 
 export default class SVGOverlay extends Component {
-  static propTypes = {
-
-  }
   render () {
     return (
       <div className='map-nav-overlay-component'>

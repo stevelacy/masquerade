@@ -1,5 +1,4 @@
-import React, { PropTypes, Component } from 'react'
-import { Icon } from 'react-fa'
+import React, { Component } from 'react'
 import Loader from 'components/Loader'
 import './index.sass'
 
