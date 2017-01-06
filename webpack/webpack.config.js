@@ -13,6 +13,7 @@ const paths = {
 }
 
 const env = process.env.NODE_ENV || 'development'
+const isDev = env === 'development'
 
 const globals = {
   port: 5000,
@@ -34,7 +35,7 @@ module.exports = {
     'react-hot-loader/patch',
     path.resolve(__dirname, paths.src)
   ],
-  devtool: 'cheap-module-source-map',
+  devtool: isDev ? 'cheap-module-source-map' : false,
   output: {
     path: path.resolve(__dirname, paths.dist),
     filename: '[hash].[name].js',
@@ -88,7 +89,6 @@ module.exports = {
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin()
   ],

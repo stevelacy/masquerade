@@ -95,7 +95,7 @@ export default class TimelineView extends Component {
 
   componentDidMount () {
     const events = eventsSource.groupBy((item) =>
-      moment(item.get('dateRecorded'))
+      moment(new Date(item.get('dateRecorded')))
         .startOf('hour')
         .format('MM:DD:HH')
     ).toArray()
@@ -104,9 +104,9 @@ export default class TimelineView extends Component {
 
   renderEvent (opts, index) {
     const service = opts.get('service')
-    const serviceIcon = serviceIcons[service] ?
-      <Icon name={service} /> :
-      <div> {String(service.charAt(0)).toUpperCase()} </div>
+    const serviceIcon = serviceIcons[service]
+      ? <Icon name={service} />
+      : <div> {String(service.charAt(0)).toUpperCase()} </div>
 
     return (
       <div className='event-content' key={opts.get('id')}>
