@@ -1,34 +1,29 @@
 require('babel-core/register')
+const path = require('path')
 const webpack = require('webpack')
 const express = require('express')
 const WebpackDevServer = require('webpack-dev-server')
 const WebpackDevMiddleware = require('webpack-dev-middleware')
 const WebpackHotMiddleware = require('webpack-hot-middleware')
 const apiFallback = require('connect-history-api-fallback')
-const config = require('../webpack.config')
+const config = require('../webpack/webpack.config')
 
 const app = express()
-const compiler = webpack(config)
 
-app.get('/v1/services', (req, res) => {
-  setTimeout(() => {
-    res.json([
-      {
-        name: 'swarm',
-        image: 'https://ss1.4sqi.net/img/swarm/homepage/sections/one/bee@2x-d270d62ab55dcf8955c151e3dbbed734.png'
-      },
-      {
-        name: 'facebook',
-        image: 'https://www.facebook.com/images/fb_icon_325x325.png'
-      }
-    ])
-  }, 1000)
-})
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(config)
 
-app.use(apiFallback())
-app.use(WebpackDevMiddleware(compiler, config.devServer))
-app.use(WebpackHotMiddleware(compiler))
+  app.use(apiFallback())
+  app.use(WebpackDevMiddleware(compiler, config.devServer))
+  app.use(WebpackHotMiddleware(compiler))
+}
 
+if (process.env.NODE_ENV === 'production') {
+  const indexPath = path.resolve(__dirname, '../dist/index.html')
+  app.use(express.static(path.resolve(__dirname, '../dist/')))
+  app.get('/', (req, res) => res.sendFile(indexPath))
+}
+  const compiler = webpack(config)
 app.listen(5000, 'localhost', function (err) {
   if (err) {
     console.log(err)

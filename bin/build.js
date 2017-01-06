@@ -1,7 +1,7 @@
 require('babel-core/register')
 const webpack = require('webpack')
-const config = require('../webpack.config')
-
+const config = require('../webpack/webpack.config')
+config
 const compiler = webpack(config)
 compiler.run((err, stats) => {
   if (err) {

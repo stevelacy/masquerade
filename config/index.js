@@ -1,14 +1,14 @@
 const pkg = require('../package.json')
 
 const root = {
-  name: pkg.name
+  name: pkg.name,
+  url: 'http://localhost:5000',
+  api: 'http://localhost:4000/api'
 }
 
 module.exports = {
   development: {
-    ...root,
-    url: 'http://localhost:5000',
-    api: 'http://localhost:4000/api'
+    ...root
   },
   production: {
     ...root

@@ -3,13 +3,13 @@ const requireDir = require('require-dir')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const pkg = require('./package')
-const config = require('./config')
+const pkg = require('../package')
+const config = require('../config')
 
 const paths = {
   root: '/',
-  src: 'src',
-  dist: 'dist'
+  src: path.resolve(__dirname, '../src'),
+  dist: path.resolve(__dirname, '../dist')
 }
 
 const env = process.env.NODE_ENV || 'development'
@@ -23,7 +23,7 @@ const globals = {
 }
 
 
-const lFolder = requireDir('./webpack/rules')
+const lFolder = requireDir('./rules')
 const rules = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
     'react-hot-loader/patch',
     path.resolve(__dirname, paths.src)
   ],
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, paths.dist),
     filename: '[hash].[name].js',
@@ -51,8 +51,8 @@ module.exports = {
       styles: path.resolve(paths.src, 'styles'),
       reducers: path.resolve(paths.src, 'reducers'),
       routes: path.resolve(paths.src, 'routes'),
-      'mapbox-gl/js/geo/transform': path.join(__dirname, '/node_modules/mapbox-gl/js/geo/transform'),
-      'mapbox-gl': path.join(__dirname, '/node_modules/mapbox-gl/dist/mapbox-gl.js')
+      'mapbox-gl/js/geo/transform': path.join(__dirname, '../node_modules/mapbox-gl/js/geo/transform'),
+      'mapbox-gl': path.join(__dirname, '../node_modules/mapbox-gl/dist/mapbox-gl.js')
     }
   },
   plugins: [
@@ -87,13 +87,16 @@ module.exports = {
     new webpack.ProvidePlugin({
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin()
   ],
   module: {
     rules: rules
   },
   devServer: {
-    historyApiFallback: {verbose: true},
+    historyApiFallback: { verbose: true },
     contentBase: paths.src,
     port: globals.port,
     hot: true,
