@@ -5,7 +5,7 @@ const WebpackDevServer = require('webpack-dev-server')
 const WebpackDevMiddleware = require('webpack-dev-middleware')
 const WebpackHotMiddleware = require('webpack-hot-middleware')
 const apiFallback = require('connect-history-api-fallback')
-const config = require('./webpack.config')
+const config = require('../webpack.config')
 
 const app = express()
 const compiler = webpack(config)

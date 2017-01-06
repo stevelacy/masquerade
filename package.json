@@ -5,8 +5,8 @@
   "scripts": {
     "test": "NODE_ENV=testing mocha --compilers js:babel-core/register test/index.js 'test/**/*.js'",
     "lint": "eslint . ./",
-    "start": "NODE_ENV=development nodemon --watch webpack.config.js --watch devserver.js --watch package.json --watch webpack/rules/ devserver.js",
-    "compile": "npm run test && DEBUG=app:* NODE_ENV=production BUILD=TRUE ./node_modules/.bin/webpack --display-error-details",
+    "start": "NODE_ENV=development nodemon --watch webpack.config.js --watch bin/*.js --watch package.json --watch webpack/rules/ ./bin/server.js",
+    "compile": "NODE_ENV=production BUILD=TRUE node ./bin/build.js --display-error-details",
     "deploy": "rm -rf dist && npm run compile && convox deploy"
   },
   "repository": {
@@ -32,11 +32,13 @@
     "classnames": "^2.2.5",
     "connect-history-api-fallback": "^1.3.0",
     "css-loader": "^0.25.0",
+    "es6-promise": "^4.0.5",
     "eslint": "^3.10.1",
     "eslint-config-rackt": "^1.1.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^6.7.0",
+    "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "glob-loader": "github:contra/glob-loader",
@@ -44,6 +46,7 @@
     "html-webpack-plugin": "^2.24.1",
     "immutability-helper": "^2.0.0",
     "immutable": "^3.8.1",
+    "imports-loader": "^0.7.0",
     "json-loader": "^0.5.4",
     "moment": "^2.17.1",
     "node-sass": "^3.12.2",
@@ -72,7 +75,8 @@
     "webpack": "2.2.0-rc.3",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "~2.2.0-rc.0",
-    "webpack-hot-middleware": "^2.14.0"
+    "webpack-hot-middleware": "^2.14.0",
+    "whatwg-fetch": "^2.0.1"
   },
   "babel": {
     "presets": [
