@@ -74,8 +74,7 @@ class RootView extends Component {
   render () {
     return (
       <BrowserRouter>
-        <div
-          className={css('root-view')}>
+        <div className={css('root-view')}>
           <TransitionGroup
             transitionName='loader-animation'
             transitionEnterTimeout={0}
@@ -96,9 +95,7 @@ class RootView extends Component {
               } />
             <Match
               pattern='/settings'
-              render={() =>
-                <SettingsView />
-              } />
+              render={() => <SettingsView /> } />
             <Miss component={NotFoundView} />
           </div>
         </div>

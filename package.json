@@ -7,6 +7,7 @@
     "lint": "eslint . ./",
     "start": "NODE_ENV=development nodemon --watch webpack.config.js --watch bin/*.js --watch package.json --watch webpack/**/* ./bin/server.js",
     "compile": "rm -rf dist && NODE_ENV=production BUILD=TRUE node ./bin/build.js --display-error-details",
+    "build:dll": "webpack --config=./webpack/webpack.dll.js",
     "deploy": "rm -rf dist && npm run compile && convox deploy"
   },
   "repository": {
@@ -58,8 +59,6 @@
     "react-addons-transition-group": "^15.3.2",
     "react-document-meta": "^2.0.3",
     "react-dom": "^15.3.2",
-    "react-fa": "^4.1.2",
-    "react-fix-it": "^0.2.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-immutable-proptypes": "^2.1.0",
     "react-map-gl": "1.7.2",

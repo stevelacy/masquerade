@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon } from 'react-fa'
+import Icon from 'components/Icon'
 import './index.sass'
 
 export default class SVGOverlay extends Component {

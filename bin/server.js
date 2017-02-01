@@ -20,13 +20,13 @@ if (process.env.NODE_ENV === 'development') {
 
 if (process.env.NODE_ENV === 'production') {
   const indexPath = path.resolve(__dirname, '../dist/index.html')
-  app.use(express.static(path.resolve(__dirname, '../dist/')))
   app.get('/', (req, res) => res.sendFile(indexPath))
 }
-  const compiler = webpack(config)
+app.use(express.static(path.resolve(__dirname, '../dist/')))
+
 app.listen(5000, 'localhost', function (err) {
   if (err) {
     console.log(err)
   }
-  console.log('Listening at localhost:5000')
+  console.log('Listening on localhost:5000')
 })

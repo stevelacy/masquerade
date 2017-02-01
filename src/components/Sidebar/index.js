@@ -1,7 +1,7 @@
 import React from 'react'
 import { PropTypes, Component } from 'core'
 import { Link } from 'react-router'
-import { Icon } from 'react-fa'
+import Icon from 'components/Icon'
 import css from 'classnames'
 import './index.sass'
 

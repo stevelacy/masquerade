@@ -6,19 +6,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const pkg = require('../package')
 const config = require('../config')
 
-const paths = {
-  root: '/',
-  src: path.resolve(__dirname, '../src'),
-  dist: path.resolve(__dirname, '../dist')
-}
-
-const env = process.env.NODE_ENV || 'development'
-const isDev = env === 'development'
+const isDev = config.env === 'development'
 
 const globals = {
   port: 5000,
-  '__config__': JSON.stringify(config[env]),
-  'process.env.NODE_ENV': JSON.stringify(env),
+  '__config__': JSON.stringify(config),
+  'process.env.NODE_ENV': JSON.stringify(config.env),
   '__DEV__': process.env.NODE_ENV === 'development', // used in react
   '__PROD__': process.env.NODE_ENV === 'production' // used in react
 }
@@ -30,28 +23,29 @@ const rules = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 module.exports = {
   context: path.resolve(__dirname),
   name: 'client',
+  cache: true,
   entry: [
     'webpack-hot-middleware/client?http://localhost:5000',
     'react-hot-loader/patch',
-    path.resolve(__dirname, paths.src)
+    path.resolve(__dirname, config.paths.src)
   ],
-  devtool: isDev ? 'cheap-module-source-map' : false,
+  devtool: isDev ? 'eval' : false,
   output: {
-    path: path.resolve(__dirname, paths.dist),
+    path: path.resolve(__dirname, config.paths.dist),
     filename: '[hash].[name].js',
     publicPath: '/'
   },
   resolve: {
     alias: {
-      app: paths.src,
+      app: config.paths.src,
       config: './config',
-      views: path.resolve(paths.src, 'views'),
-      core: path.resolve(paths.src, 'core'),
-      components: path.resolve(paths.src, 'components'),
-      actions: path.resolve(paths.src, 'actions'),
-      styles: path.resolve(paths.src, 'styles'),
-      reducers: path.resolve(paths.src, 'reducers'),
-      routes: path.resolve(paths.src, 'routes'),
+      views: path.resolve(config.paths.src, 'views'),
+      core: path.resolve(config.paths.src, 'core'),
+      components: path.resolve(config.paths.src, 'components'),
+      actions: path.resolve(config.paths.src, 'actions'),
+      styles: path.resolve(config.paths.src, 'styles'),
+      reducers: path.resolve(config.paths.src, 'reducers'),
+      routes: path.resolve(config.paths.src, 'routes'),
       'mapbox-gl/js/geo/transform': path.join(__dirname, '../node_modules/mapbox-gl/js/geo/transform'),
       'mapbox-gl': path.join(__dirname, '../node_modules/mapbox-gl/dist/mapbox-gl.js')
     }
@@ -60,8 +54,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin(globals),
     new HtmlWebpackPlugin({
-      template: path.join(paths.src, 'index.html'),
-      favicon: path.join(paths.src, 'assets/favicon.ico'),
+      template: path.join(config.paths.src, 'index.html'),
+      favicon: path.join(config.paths.src, 'assets/favicon.ico'),
       title: pkg.name,
       inject: 'body',
       minify: {
@@ -74,9 +68,9 @@ module.exports = {
       disable: false,
       allChunks: true
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest']
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: ['vendor', 'manifest']
+    // }),
     new webpack.LoaderOptionsPlugin({
       test: /\.js?$/,
       options: {
@@ -90,16 +84,21 @@ module.exports = {
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.DllReferencePlugin({
+      context: config.paths.src,
+      manifest: require(path.join(config.paths.src, 'vendor-manifest.json'))
+    })
   ],
   module: {
-    rules: rules
+    rules
   },
   devServer: {
     historyApiFallback: { verbose: true },
-    contentBase: paths.src,
+    contentBase: config.paths.src,
     port: globals.port,
     hot: true,
+    quiet: true,
     publicPath: '/',
     stats: {
       colors: true

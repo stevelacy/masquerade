@@ -4,7 +4,7 @@ import { Component } from 'core'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import css from 'classnames'
-import { Icon } from 'react-fa'
+import Icon from 'components/Icon'
 import Title from 'components/Title'
 import './index.sass'
 

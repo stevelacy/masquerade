@@ -8,9 +8,7 @@ window.config = __config__
 /*eslint-enable */
 
 render(
-  <AppContainer>
-    <Root />
-  </AppContainer>,
+  <AppContainer><Root /></AppContainer>,
   document.getElementById('root')
 )
 
@@ -18,9 +16,7 @@ if (module.hot) {
   module.hot.accept('./views/Root', () => {
     const Root = require('./views/Root').default
     render(
-      <AppContainer>
-        <Root />
-      </AppContainer>,
+      <AppContainer><Root /></AppContainer>,
       document.getElementById('root')
     )
   })
