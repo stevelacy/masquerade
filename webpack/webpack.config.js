@@ -16,7 +16,6 @@ const globals = {
   '__PROD__': process.env.NODE_ENV === 'production' // used in react
 }
 
-
 const lFolder = requireDir('./rules')
 const rules = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
@@ -29,25 +28,16 @@ module.exports = {
     'react-hot-loader/patch',
     path.resolve(__dirname, config.paths.src)
   ],
-  devtool: isDev ? 'eval' : false,
+  devtool: isDev ? '#source-map' : false,
   output: {
     path: path.resolve(__dirname, config.paths.dist),
     filename: '[hash].[name].js',
     publicPath: '/'
   },
   resolve: {
+    modules: [ config.paths.src, 'node_modules' ],
     alias: {
-      app: config.paths.src,
-      config: './config',
-      views: path.resolve(config.paths.src, 'views'),
-      core: path.resolve(config.paths.src, 'core'),
-      components: path.resolve(config.paths.src, 'components'),
-      actions: path.resolve(config.paths.src, 'actions'),
-      styles: path.resolve(config.paths.src, 'styles'),
-      reducers: path.resolve(config.paths.src, 'reducers'),
-      routes: path.resolve(config.paths.src, 'routes'),
-      'mapbox-gl/js/geo/transform': path.join(__dirname, '../node_modules/mapbox-gl/js/geo/transform'),
-      'mapbox-gl': path.join(__dirname, '../node_modules/mapbox-gl/dist/mapbox-gl.js')
+      config: './config'
     }
   },
   plugins: [

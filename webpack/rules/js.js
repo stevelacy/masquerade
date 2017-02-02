@@ -6,7 +6,7 @@ module.exports = [
     test: /\.js$/,
     include: path.resolve(__dirname, '../../src'),
     loader: 'babel-loader',
-    query: {
+    options: {
       cacheDirectory: true,
       presets: babel.presets,
       plugins: [

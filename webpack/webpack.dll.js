@@ -17,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(config.paths.dist),
-    filename: 'dll.[name].js',
+    filename: '[hash].[name].js',
     library: '[name]'
   },
   resolve: {

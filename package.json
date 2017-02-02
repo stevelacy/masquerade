@@ -71,7 +71,7 @@
     "standard-loader": "^5.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "2.2.0-rc.3",
+    "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "~2.2.0-rc.0",
     "webpack-hot-middleware": "^2.14.0",
